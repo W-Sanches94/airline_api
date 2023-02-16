@@ -21,7 +21,7 @@ public class Flight {
     private String departureDate;
     @Column
     private String departureTime;
-    @Column
+
     private List<Passenger> passengers;
 
     public Flight(String destination, int capacity, String departureDate, String departureTime) {

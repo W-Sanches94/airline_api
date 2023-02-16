@@ -16,7 +16,6 @@ public class Passenger {
     private String name;
     @Column
     private String email;
-    @Column
     private List<Flight> flights;
 
     public Passenger(String name, String email) {
