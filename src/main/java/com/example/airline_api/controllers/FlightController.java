@@ -1,8 +1,11 @@
 package com.example.airline_api.controllers;
 
 import com.example.airline_api.models.Flight;
+import com.example.airline_api.models.Passenger;
+import com.example.airline_api.repositories.FlightRepository;
 import com.example.airline_api.services.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,18 +21,19 @@ public class FlightController {
     // Display all available flights
     @GetMapping
     public ResponseEntity<List<Flight>> getAllFlights(){
-        return null;
+        return new ResponseEntity<>(flightService.findAllFlights(), HttpStatus.OK);
     }
 
     // Display a specific flight
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Flight> getFlightById(){
-        return null;
+    public ResponseEntity<Flight> getFlightById(Long id){
+        Flight foundFlight = flightService.findFlight(id);
+        return new ResponseEntity<>(foundFlight, HttpStatus.OK);
     }
 
     // Add details of a new flight
     @PostMapping
-    public ResponseEntity<Flight> addNewFlight(){
+    public ResponseEntity<Flight> addNewFlight(@RequestBody long id){
         return null;
     }
 
@@ -41,8 +45,9 @@ public class FlightController {
 
     // Cancel flight
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity cancelFlight(){
-        return null;
+    public ResponseEntity<Long> cancelFlight(@PathVariable Long id){
+        flightService.CancelFlight(id);
+        return new ResponseEntity<>(id,HttpStatus.OK);
     }
 
 }
