@@ -1,5 +1,7 @@
 package com.example.airline_api.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +20,13 @@ public class Passenger {
     private String email;
 
 
+    @ManyToMany
+    @JsonIgnoreProperties({"passengers"})
+    @JoinTable(
+            name = "flight_passengers",
+            joinColumns = @JoinColumn(name = "passenger_id"),
+            inverseJoinColumns = @JoinColumn (name = "flight_id")
+    )
     private List<Flight> flights;
 
     public Passenger(String name, String email) {

@@ -31,5 +31,12 @@ public class FlightService {
         flightRepository.deleteById(id);
     }
 
-
+    public Flight addPassengerToFlight(long flightId, Passenger passenger){
+        Flight flight = flightRepository.findById(flightId).get();
+        List<Passenger> passengers = flight.getPassengers();
+        passengers.add(passenger);
+        flight.setPassengers(passengers);
+        flightRepository.save(flight);
+        return flight;
+    }
 }
